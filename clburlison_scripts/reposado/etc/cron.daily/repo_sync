@@ -1,0 +1,15 @@
+#!/bin/bash
+# For Ubuntu 14.04 - might work on other systems however it is untested
+
+CODEDIR="/usr/local/asus/reposado/code"
+
+# Sync with Apple
+${CODEDIR}/repo_sync
+
+# Go away Config-data. Nobody likes you. I want you to install automatically.
+# requires at least reposado 37f31b4 - https://github.com/wdas/reposado/commit/37f31b412a5b1a9bb60f16f2572290379d1cb053
+${CODEDIR}/repoutil --remove-config-data all
+
+# Fix permissions for web-server
+/bin/chgrp -R www-data /usr/local/asus/www
+/bin/chmod -R g+rX /usr/local/asus/www
